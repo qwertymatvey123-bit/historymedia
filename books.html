@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Книги</title>
+    <style>
+        :root {
+            --cream: #f8efe6;
+            --wine: #450101;
+            --brown: #6f3f2a;
+            --soft-brown: #b58b72;
+            --gold: #c8a46a;
+            --dark: #1d1110;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--cream);
+            color: var(--dark);
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .page {
+            min-height: 100vh;
+            background:
+                linear-gradient(90deg, rgba(248, 239, 230, 0.97), rgba(248, 239, 230, 0.88), rgba(69, 1, 1, 0.35)),
+                radial-gradient(circle at 15% 20%, rgba(200, 164, 106, 0.25), transparent 34%),
+                radial-gradient(circle at 85% 75%, rgba(69, 1, 1, 0.35), transparent 35%),
+                url('https://www.cinemafia.ru/images/upload/jFDdndyOMY.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .page::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(69, 1, 1, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(69, 1, 1, 0.05) 1px, transparent 1px);
+            background-size: 42px 42px;
+        }
+
+        header {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 7vw;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--wine);
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+        }
+
+        nav a {
+            color: var(--wine);
+            text-decoration: none;
+            font-weight: 600;
+            opacity: 0.85;
+        }
+
+        nav a:hover {
+            opacity: 1;
+            border-bottom: 2px solid var(--wine);
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 55px 7vw 90px;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 8px 14px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(69, 1, 1, 0.35);
+            background: rgba(248, 239, 230, 0.75);
+            color: var(--wine);
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+        }
+
+        h1 {
+            max-width: 900px;
+            font-size: clamp(42px, 6vw, 82px);
+            line-height: 0.98;
+            color: var(--wine);
+            margin-bottom: 28px;
+        }
+
+        .intro {
+            max-width: 820px;
+            font-family: Arial, sans-serif;
+            font-size: 19px;
+            line-height: 1.75;
+            color: #3d2720;
+            margin-bottom: 48px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 36px;
+            align-items: stretch;
+        }
+
+        .timeline {
+            background: rgba(248, 239, 230, 0.93);
+            border: 1px solid rgba(69, 1, 1, 0.18);
+            box-shadow: 0 22px 60px rgba(29, 17, 16, 0.18);
+            padding: 38px;
+        }
+
+        .timeline h2,
+        .side-card h2 {
+            color: var(--wine);
+            font-size: 34px;
+            margin-bottom: 24px;
+        }
+
+        .event {
+            padding: 24px 0;
+            border-top: 1px solid rgba(69, 1, 1, 0.15);
+        }
+
+        .year {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: var(--brown);
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .event h3 {
+            font-size: 26px;
+            color: #2d1413;
+            margin-bottom: 10px;
+        }
+
+        .event p,
+        .side-card p {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            color: #4e3730;
+        }
+
+        .side {
+            display: grid;
+            gap: 24px;
+        }
+
+        .image-card {
+            min-height: 280px;
+            background:
+                linear-gradient(rgba(69, 1, 1, 0.68), rgba(69, 1, 1, 0.68)),
+                url('img/volga.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--cream);
+            padding: 34px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            box-shadow: 0 22px 60px rgba(29, 17, 16, 0.22);
+        }
+
+        .image-card span {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+            color: #ead8cc;
+            margin-bottom: 10px;
+        }
+
+        .image-card h2 {
+            font-size: 40px;
+            line-height: 1.05;
+        }
+
+        .side-card {
+            background: rgba(69, 1, 1, 0.88);
+            color: var(--cream);
+            padding: 34px;
+            box-shadow: 0 22px 60px rgba(29, 17, 16, 0.22);
+        }
+
+        .side-card h2 {
+            color: #fff7ee;
+        }
+
+        .side-card p {
+            color: #ead8cc;
+            margin-bottom: 22px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 22px;
+            background: var(--cream);
+            color: var(--wine);
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-weight: 700;
+        }
+
+        .bottom-strip {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 20px;
+            background: var(--wine);
+            z-index: 3;
+        }
+
+        @media (max-width: 900px) {
+            header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 14px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <header>
+            <div class="logo">История России</div>
+            <nav>
+                <a href="books.html">Книги</a>
+                <a href="games.html">Видеоигры</a>
+                <a href="kino.html">Кино</a>
+                <a href="fest.html">Фестивали</a>
+		<a href="web.html">Порталы</a>
+            </nav>
+        </header>
+
+        <section class="content">
+            <span class="label"><i>Сквозь страницы можно услышать голос прошлого...</i></span>
+            <h1>Книги</h1>
+            <p class="intro">
+                Подборка книг, рассказывающих о ключевых событиях, эпохах и личностях российской истории доступным и интересным языком.
+            </p>
+
+            <div class="grid">
+                <section class="timeline">
+                    <h2>Некоторые примеры книг</h2>
+
+                    <article class="event">
+                        <div class="year">Александр Мясников</div>
+                        <h3>«Российский хронограф»</h3>
+                        <p>Уникальный путеводитель по истории России с мультимедийными дополнениями. Книга содержит QR-коды, ведущие на виртуальную площадку мультимедийного парка «Россия – моя история», где можно найти дополнительные материалы о всех правителях. Это совместный проект издательства «Вече» и исторического парка.
+</p>
+                    </article>
+
+                    <article class="event">
+                        <div class="year">издательство «Медиарост»</div>
+                        <h3>«Волга. От Истоков до Каспия»</h3>
+                        <p>Книга-путеводитель по самой длинной реке Европы. Содержит заметки о городах, расположенных на берегах Волги, и будет интересна всем, кто хочет узнать историю России через её главную водную артерию.
+</p>
+                    </article>
+
+                    <article class="event">
+                        <div class="year">издательство «Медиарост»</div>
+                        <h3>«Великий адмирал» и «Полководцы выходят из тени»</h3>
+                        <p>Книги, посвященные ключевым фигурам российской военной истории, которые часто оставались в тени. «Великий адмирал» рассказывает, в том числе, о создании первых судостроительных верфей.</p>
+                    </article>
+                </section>
+
+                <aside class="side">
+                    <div class="image-card">
+                        <span>Иллюстрация</span>
+                        <h2>«Волга. От Истоков до Каспия»</h2>
+                    </div>
+
+                    <div class="side-card">
+                        <h2>О разделе</h2>
+                        <p>
+                            В этом разделе собраны книги, посвящённые истории России, её культуре, государству и выдающимся личностям. Здесь можно найти как научно-популярные издания, так и исторические путеводители, помогающие изучать прошлое через современный формат подачи материала.</p>
+                        <a class="btn" href="index.html">Вернуться на главную</a>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <div class="bottom-strip"></div>
+    </main>
+</body>
+</html>
